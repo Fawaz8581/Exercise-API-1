@@ -33,6 +33,26 @@ async function createUser(name, email, password) {
 }
 
 /**
+ * Check existing email
+ * @param {string} email - Email
+ * @returns {Promise}
+ */
+async function checkEmail(email) {
+  const existingUser = await User.findOne({ email });
+  return existingUser;
+}
+
+/**
+ * Update user's password
+ * @param {string} id - User ID
+ * @param {string} newPassword - Hashed new password
+ * @returns {Promise}
+ */
+async function updatePassword(id, newPassword) {
+  return User.findByIdAndUpdate(id, { password: newPassword });
+}
+
+/**
  * Update existing user
  * @param {string} id - User ID
  * @param {string} name - Name
@@ -68,4 +88,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  checkEmail,
+  updatePassword,
 };
